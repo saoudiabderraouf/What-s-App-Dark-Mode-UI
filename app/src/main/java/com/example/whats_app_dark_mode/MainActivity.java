@@ -18,9 +18,11 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView recyclerViewStories, recyclerViewMessages;
+    TextView textViewChats, textViewGroups;
+    ImageView iv_home_green, iv_home_white, iv_phone_green, iv_phone_white, iv_camera_green, iv_camera_white, iv_profile_green, iv_profile_white;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,46 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerViewStories = findViewById(R.id.rv_stories);
         recyclerViewMessages = findViewById(R.id.rv_messages);
+        textViewChats = findViewById(R.id.chats);
+        textViewGroups = findViewById(R.id.Groups);
+        iv_home_green = findViewById(R.id.home_green);
+        iv_home_white = findViewById(R.id.home_white);
+        iv_phone_green = findViewById(R.id.phone_green);
+        iv_phone_white = findViewById(R.id.phone_white);
+        iv_camera_green = findViewById(R.id.camera_green);
+        iv_camera_white = findViewById(R.id.camera_white);
+        iv_profile_green = findViewById(R.id.profile_green);
+        iv_profile_white = findViewById(R.id.profile_white);
+        iv_home_green.setOnClickListener(this);
+        iv_home_white.setOnClickListener(this);
+        iv_phone_green.setOnClickListener(this);
+        iv_phone_white.setOnClickListener(this);
+        iv_camera_green.setOnClickListener(this);
+        iv_camera_white.setOnClickListener(this);
+        iv_profile_green.setOnClickListener(this);
+        iv_profile_white.setOnClickListener(this);
+
+        textViewChats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textViewChats.setBackgroundResource(R.drawable.background_cg);
+                textViewChats.setTextColor(ContextCompat.getColor(getBaseContext(),R.color.tg_selected));
+                textViewGroups.setBackgroundResource(0);
+                textViewGroups.setTextColor(ContextCompat.getColor(getBaseContext(),R.color.tg_non_selected));
+                Toast.makeText(getBaseContext(),"Chats section",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        textViewGroups.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textViewGroups.setBackgroundResource(R.drawable.background_cg);
+                textViewGroups.setTextColor(ContextCompat.getColor(getBaseContext(),R.color.tg_selected));
+                textViewChats.setBackgroundResource(0);
+                textViewChats.setTextColor(ContextCompat.getColor(getBaseContext(),R.color.tg_non_selected));
+                Toast.makeText(getBaseContext(),"Groups section",Toast.LENGTH_SHORT).show();
+            }
+        });
 
         ArrayList<Storie> stories = getStories();
         StoriesAdapter adapter = new StoriesAdapter(stories,getApplicationContext());
@@ -41,6 +83,58 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         recyclerViewMessages.setAdapter(adapter1);
         recyclerViewMessages.setLayoutManager(layoutManager1);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.home_white :
+                iv_home_green.setVisibility(View.VISIBLE);
+                iv_home_white.setVisibility(View.GONE);
+                iv_phone_green.setVisibility(View.GONE);
+                iv_phone_white.setVisibility(View.VISIBLE);
+                iv_camera_green.setVisibility(View.GONE);
+                iv_camera_white.setVisibility(View.VISIBLE);
+                iv_profile_green.setVisibility(View.GONE);
+                iv_profile_white.setVisibility(View.VISIBLE);
+                Toast.makeText(getBaseContext(),"Home",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.phone_white :
+                iv_home_green.setVisibility(View.GONE);
+                iv_home_white.setVisibility(View.VISIBLE);
+                iv_phone_green.setVisibility(View.VISIBLE);
+                iv_phone_white.setVisibility(View.GONE);
+                iv_camera_green.setVisibility(View.GONE);
+                iv_camera_white.setVisibility(View.VISIBLE);
+                iv_profile_green.setVisibility(View.GONE);
+                iv_profile_white.setVisibility(View.VISIBLE);
+                Toast.makeText(getBaseContext(),"Phone",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.camera_white :
+                iv_home_green.setVisibility(View.GONE);
+                iv_home_white.setVisibility(View.VISIBLE);
+                iv_phone_green.setVisibility(View.GONE);
+                iv_phone_white.setVisibility(View.VISIBLE);
+                iv_camera_green.setVisibility(View.VISIBLE);
+                iv_camera_white.setVisibility(View.GONE);
+                iv_profile_green.setVisibility(View.GONE);
+                iv_profile_white.setVisibility(View.VISIBLE);
+                Toast.makeText(getBaseContext(),"Camera",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.profile_white :
+                iv_home_green.setVisibility(View.GONE);
+                iv_home_white.setVisibility(View.VISIBLE);
+                iv_phone_green.setVisibility(View.GONE);
+                iv_phone_white.setVisibility(View.VISIBLE);
+                iv_camera_green.setVisibility(View.GONE);
+                iv_camera_white.setVisibility(View.VISIBLE);
+                iv_profile_green.setVisibility(View.VISIBLE);
+                iv_profile_white.setVisibility(View.GONE);
+                Toast.makeText(getBaseContext(),"Profile",Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
     }
 
     public ArrayList<Storie> getStories(){

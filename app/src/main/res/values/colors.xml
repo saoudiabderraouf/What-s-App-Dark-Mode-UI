@@ -8,4 +8,6 @@
     <color name="blue2">#2250B6</color>
     <color name="red">#B63D37</color>
     <color name="gray">#AEB0B4</color>
+    <color name="tg_selected">#CCCBCB</color>
+    <color name="tg_non_selected">#5C5C5C</color>
 </resources>
