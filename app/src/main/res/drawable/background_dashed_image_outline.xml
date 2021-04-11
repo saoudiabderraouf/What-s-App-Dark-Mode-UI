@@ -11,7 +11,7 @@
         android:angle="45"/>
 
     <stroke android:width="3dp"
-        android:color="@color/green3"
+        android:color="#DDFFFFFF"
         android:dashWidth="10dp" android:dashGap="7dp"/>
 
 </shape>
